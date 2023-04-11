@@ -40,7 +40,7 @@ export function setToken(data: DataInfo<Date>) {
 
   expires > 0
     ? Cookies.set(TokenKey, cookieString, {
-        expires: (expires - Date.now()) / 86400000
+        expires: (expires - Date.now()) / 86400000 // 因为js-cookie的expires参数是以天为单位的，所以要转换一下
       })
     : Cookies.set(TokenKey, cookieString);
 

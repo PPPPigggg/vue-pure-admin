@@ -175,8 +175,9 @@ function handleAsyncRoutes(routeList) {
           return;
         } else {
           // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
+          // routes[0]是因为routes的第一个一定是home组件因为，在之前已经排过序了
           router.options.routes[0].children.push(v);
-          // 最终路由进行升序
+          // 由于重新push了新的路由，所以需要重新排序
           ascending(router.options.routes[0].children);
           if (!router.hasRoute(v?.name)) router.addRoute(v);
           const flattenRouters: any = router
@@ -222,7 +223,7 @@ function initRouter() {
 }
 
 /**
- * 将多级嵌套路由处理成一维数组
+ * 将多级嵌套路由处理成一维数组 并保留了原来的children
  * @param routesList 传入路由
  * @returns 返回处理后的一维路由
  */
@@ -239,6 +240,7 @@ function formatFlatteningRoutes(routesList: RouteRecordRaw[]) {
   return hierarchyList;
 }
 
+// 将所有路由都移入到‘/’路由下，组成二级路由，因为可能会导致keepAlive执行多次的问题
 /**
  * 一维数组处理成多级嵌套数组（三级及以上的路由全部拍成二级，keep-alive 只支持到二级缓存）
  * https://github.com/pure-admin/vue-pure-admin/issues/67
@@ -280,6 +282,7 @@ function handleAliveRoute(matched: RouteRecordNormalized[], mode?: string) {
       });
       break;
     default:
+      // 如果要刷新keepAlive页面需要清除移除当前keepAlive
       usePermissionStoreHook().cacheOperate({
         mode: "delete",
         name: matched[matched.length - 1].name

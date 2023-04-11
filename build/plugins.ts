@@ -7,7 +7,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { viteMockServe } from "vite-plugin-mock";
 import { configCompressPlugin } from "./compress";
 import { visualizer } from "rollup-plugin-visualizer";
-import removeConsole from "vite-plugin-remove-console";
+// import removeConsole from "vite-plugin-remove-console";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import DefineOptions from "unplugin-vue-define-options/vite";
@@ -33,7 +33,7 @@ export function getPluginsList(
     configCompressPlugin(VITE_COMPRESSION),
     DefineOptions(),
     // 线上环境删除console
-    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
+    // removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
     viteBuildInfo(),
     // 自定义主题
     themePreprocessorPlugin({

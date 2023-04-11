@@ -59,6 +59,10 @@ interface ImportMetaEnv extends ViteEnv {
   __: unknown;
 }
 
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 interface Fn<T = any, R = T> {
   (...arg: T[]): R;
 }

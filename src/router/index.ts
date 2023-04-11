@@ -83,8 +83,10 @@ export const router: Router = createRouter({
 export function resetRouter() {
   router.getRoutes().forEach(route => {
     const { name, meta } = route;
+    // 只重置动态路由
     if (name && router.hasRoute(name) && meta?.backstage) {
       router.removeRoute(name);
+      // TODO疑惑
       router.options.routes = formatTwoStageRoutes(
         formatFlatteningRoutes(buildHierarchyTree(ascending(routes)))
       );
@@ -107,6 +109,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
   }
   const userInfo = storageSession().getItem<DataInfo<number>>(sessionKey);
   NProgress.start();
+  // 判断跳转的路由是否是外部链接
   const externalLink = isUrl(to?.name as string);
   if (!externalLink) {
     to.matched.some(item => {
@@ -156,6 +159,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
               });
             }
           }
+          // 重新跳转路由
           router.push(to.fullPath);
         });
       }

@@ -60,8 +60,11 @@ export const buildHierarchyTree = (tree: any[], pathList = []): any => {
   }
   if (!tree || tree.length === 0) return [];
   for (const [key, node] of tree.entries()) {
+    // 每一项的标识符
     node.id = key;
+    // 当前树的父级标识符
     node.parentId = pathList.length ? pathList[pathList.length - 1] : null;
+    // 标识从父级到当前节点的路径
     node.pathList = [...pathList, node.id];
     const hasChildren = node.children && node.children.length > 0;
     if (hasChildren) {

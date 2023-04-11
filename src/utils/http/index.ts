@@ -97,6 +97,7 @@ class PureHttp {
                         PureHttp.isRefreshing = false;
                       });
                   }
+                  // 这里的resolve会等待这个PureHttp.retryOriginalRequest(config)执行完毕
                   resolve(PureHttp.retryOriginalRequest(config));
                 } else {
                   config.headers["Authorization"] = formatToken(
