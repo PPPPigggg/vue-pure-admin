@@ -1,6 +1,6 @@
 import type { Emitter } from "mitt";
 import mitt from "mitt";
-
+// XXX: 移除mitt
 type Events = {
   resize: {
     detail: {

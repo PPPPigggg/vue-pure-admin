@@ -27,6 +27,7 @@ function init() {
     const iframe = unref(frameRef);
     if (!iframe) return;
     const _frame = iframe as any;
+    // 判定事件是否支持
     if (_frame.attachEvent) {
       _frame.attachEvent("onload", () => {
         hideLoading();

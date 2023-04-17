@@ -13,7 +13,7 @@ export default [
     }
   },
   {
-    path: "/redirect",
+    path: "/redirect", // 此路由是用来刷新页面的
     component: Layout,
     meta: {
       icon: "homeFilled",

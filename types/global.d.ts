@@ -264,4 +264,6 @@ declare global {
     $storage: ResponsiveStorage;
     $config: ServerConfigs;
   }
+
+  function defineOptions(p: any): any;
 }

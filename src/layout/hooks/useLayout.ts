@@ -6,7 +6,6 @@ import { useMultiTagsStore } from "@/store/modules/multiTags";
 
 export function useLayout() {
   const { $storage, $config } = useGlobal<GlobalPropertiesApi>();
-
   const initStorage = () => {
     /** 路由 */
     if (
